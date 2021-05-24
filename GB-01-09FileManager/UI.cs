@@ -32,10 +32,7 @@ namespace GB_01_09FileManager
                     DrawSymbol(WindWidth / 2 , i, '║');
                     DrawSymbol((3*WindWidth / 4)-1, i, '║');
                 }
- 
             }
-
-
             DrawText(0, 0, $"╔{GetIteratedString("═", WindWidth)}╗");
             DrawText(0, 2, $"╠{GetIteratedString("═", WindWidth)}╣");
             DrawText(0, 5, $"╠{GetIteratedString("═", WindWidth)}╣");
@@ -45,8 +42,6 @@ namespace GB_01_09FileManager
                                          $"{GetIteratedString("═", (WindWidth / 4) - 1)}╩{GetIteratedString("═", (WindWidth / 4))}══╣");
             DrawText(0, windHeight - 3, $"╠{GetIteratedString("═", WindWidth)}╣");
             DrawText(0, windHeight-1 , $"╚{GetIteratedString("═", WindWidth)}╝");
-
-
         }
 
 
@@ -83,8 +78,5 @@ namespace GB_01_09FileManager
             Console.BackgroundColor = backColor;
             Console.Write(symbol);
         }
-
-
-
     }
 }

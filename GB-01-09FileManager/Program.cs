@@ -29,18 +29,15 @@ namespace GB_01_09FileManager
             SetConsoleDisplayMode(hConsole, 1, IntPtr.Zero);
             Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
             Console.SetWindowSize(Console.WindowWidth, Console.WindowHeight);
-
-
-
-
-
-                                                                                                   
+                                                                                    
             Console.CursorVisible = false;
             //Console.SetWindowSize(200, 50);
 
-        
             UI.DrawInterface();
-            Console.SetCursorPosition(0, 0);
+
+            UIElements.FirstLine();
+
+            Console.SetCursorPosition(1, Console.WindowHeight-4);
 
             //ThreadWork = false;
             //WindowSizeUpdater.Join();
