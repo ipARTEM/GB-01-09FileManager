@@ -35,7 +35,7 @@ namespace GB_01_09FileManager
 
             UI.DrawInterface();
 
-            UIElements.FirstLine();
+            UIElements.FirstLineAsync();
 
             Console.SetCursorPosition(1, Console.WindowHeight-4);
 
