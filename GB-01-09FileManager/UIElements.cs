@@ -15,15 +15,28 @@ namespace GB_01_09FileManager
             Console.WriteLine("File Manager (C) ARTEM KHIMIN");
 
 
+
             Console.SetCursorPosition(113, 1);
             Console.WriteLine($"{DateTime.Now.DayOfWeek}");
+
+             string date="Дата";
+
+            
 
 
             while (true)
             {
 
-                Console.SetCursorPosition(200, 1);
-                Console.WriteLine($"{DateTime.Now}");
+                lock (date)
+                {
+                    Console.SetCursorPosition(200, 1);
+                    date = Convert.ToString(DateTime.Now);
+                    Console.WriteLine($"{date}");
+                    Console.SetCursorPosition(1, Console.WindowHeight - 4);
+
+                }
+
+               
                 await Task.Delay(100);
 
             }
