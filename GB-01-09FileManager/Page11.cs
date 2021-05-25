@@ -6,16 +6,7 @@ using System.Threading.Tasks;
 
 namespace GB_01_09FileManager
 {
-    static public class СursorFocus
+    class Page11
     {
-
     }
-    
-
-
-
-
 }
-
-
-

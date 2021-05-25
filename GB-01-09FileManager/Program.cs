@@ -22,6 +22,7 @@ namespace GB_01_09FileManager
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool SetConsoleDisplayMode(IntPtr ConsoleHandle, uint Flags, IntPtr NewScreenBufferDimensions);
 
+         static LogicFileManager logic = new LogicFileManager();
 
         static void Main(string[] args)
         {
@@ -30,12 +31,16 @@ namespace GB_01_09FileManager
             Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
             Console.SetWindowSize(Console.WindowWidth, Console.WindowHeight);
                                                                                     
-            Console.CursorVisible = false;
+            //Console.CursorVisible = false;
             //Console.SetWindowSize(200, 50);
 
             UI.DrawInterface();
 
             UIElements.FirstLineAsync();
+
+            logic.GetDrives();
+
+            
 
             Console.SetCursorPosition(1, Console.WindowHeight-4);
 

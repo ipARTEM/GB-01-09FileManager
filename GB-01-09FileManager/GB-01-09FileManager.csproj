@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogicFileManager.cs" />
+    <Compile Include="Page11.cs" />
+    <Compile Include="Page12.cs" />
+    <Compile Include="Page21.cs" />
+    <Compile Include="Page22.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI.cs" />
