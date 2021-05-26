@@ -29,7 +29,13 @@ namespace NewFileManager
 
 
             FileManager manager = new FileManager();
+            
+            UIElements.FirstLine();
+            //UIElements.SecondLine();
+            
+            
             manager.Explore();
+            
 
 
         }

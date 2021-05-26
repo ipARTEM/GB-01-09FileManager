@@ -10,10 +10,16 @@ namespace NewFileManager
     class FilePanel
     { //========================== Static ==========================
 
+
+
+
         #region Parameters
 
-        public static int PANEL_HEIGHT = 18;
-        public static int PANEL_WIDTH = 120;
+
+        public int panelH = 20;
+
+        public static int PANEL_HEIGHT = 30;
+        public static int PANEL_WIDTH = 40;
 
         #endregion
 
@@ -30,7 +36,7 @@ namespace NewFileManager
             }
             set
             {
-                if (0 <= value && value <= Console.WindowHeight - FilePanel.PANEL_HEIGHT)
+                if (0 <= value && value <= Console.WindowHeight - panelH)
                 {
                     this.top = value;
                 }
@@ -403,7 +409,7 @@ namespace NewFileManager
             {
                 caption.Append(' ').Append(this.path).Append(' ');
             }
-            UI.PrintString(caption.ToString(), this.left + this.width / 2 - caption.ToString().Length / 2, this.top, ConsoleColor.White, ConsoleColor.Black);
+            UI.PrintString(caption.ToString(), this.left + this.width / 2 - caption.ToString().Length / 2, this.top-1, ConsoleColor.White, ConsoleColor.Black);
 
             this.PrintContent();
         }

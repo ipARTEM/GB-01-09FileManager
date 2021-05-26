@@ -8,7 +8,7 @@ namespace NewFileManager
 {
     class UIElements
     {
-        static public void FirstLineAsync()
+        static public void FirstLine()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(2, 1);

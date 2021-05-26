@@ -28,24 +28,21 @@ namespace NewFileManager
 
         static FileManager()
         {
-            Console.CursorVisible = false;
-            Console.SetWindowSize(120, 41);
-            Console.SetBufferSize(120, 41);
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public FileManager()
         {
-            FilePanel filePanel = new FilePanel();
-            filePanel.Top = 0;
-            filePanel.Left = 0;
-            this.panels.Add(filePanel);
+            //1-панель
+            FilePanel filePanel1 = new FilePanel();
+            filePanel1.Top = 7;
+            filePanel1.Left = 1;
+            this.panels.Add(filePanel1);
 
-            filePanel = new FilePanel();
-            filePanel.Top = FilePanel.PANEL_HEIGHT;
-            filePanel.Left = 0;
-            this.panels.Add(filePanel);
+            //2-панель
+            filePanel1 = new FilePanel();
+            filePanel1.Top = 7;
+            filePanel1.Left = 110;
+            this.panels.Add(filePanel1);
 
             activePanelIndex = 0;
 
@@ -67,6 +64,8 @@ namespace NewFileManager
             bool exit = false;
             while (!exit)
             {
+                UI.DrawInterface();
+
                 if (Console.KeyAvailable)
                 {
                     this.ClearMessage();
@@ -74,6 +73,9 @@ namespace NewFileManager
                     ConsoleKeyInfo userKey = Console.ReadKey(true);
                     switch (userKey.Key)
                     {
+                        case ConsoleKey.Escape:
+                            exit = true;
+                            break;
                         case ConsoleKey.Tab:
                             this.ChangeActivePanel();
                             break;
@@ -100,11 +102,6 @@ namespace NewFileManager
                             break;
                         case ConsoleKey.F9:
                             this.Delete();
-                            break;
-                        case ConsoleKey.F10:
-                            exit = true;
-                            Console.ResetColor();
-                            Console.Clear();
                             break;
                         case ConsoleKey.DownArrow:
                             goto case ConsoleKey.PageUp;
@@ -438,10 +435,9 @@ namespace NewFileManager
         private void DrawViewFileFrame(string file)
         {
             Console.Clear();
-            //PsCon.PrintFrameDoubleLine(0, 0, Console.WindowWidth, Console.WindowHeight - 5, ConsoleColor.DarkYellow, ConsoleColor.Black);
+            
             string fileName = String.Format(" {0} ", file);
             UI.PrintString(fileName, (Console.WindowWidth - fileName.Length) / 2, 0, ConsoleColor.Yellow, ConsoleColor.Black);
-            //PsCon.PrintFrameLine(0, Console.WindowHeight - 5, Console.WindowWidth, 4, ConsoleColor.DarkYellow, ConsoleColor.Black);
             UI.PrintString("PageDown / PageUp - навигация, Esc - выход", 1, Console.WindowHeight - 4, ConsoleColor.White, ConsoleColor.Black);
         }
 
@@ -459,28 +455,6 @@ namespace NewFileManager
             fileContent = fileContent.Replace("\a", " ").Replace("\b", " ").Replace("\f", " ").Replace("\r", " ").Replace("\v", " ");
             SR.Close();
             return fileContent;
-        }
-
-        private void PrintStingFrame(string text)
-        {
-            Console.SetCursorPosition(1, 1);
-
-            int frameWidth = Console.WindowWidth - 2;
-            int colCount = 0;
-            int rowCount = 1;
-            int symbolIndex = 0;
-            while (symbolIndex < text.Length)
-            {
-                if (colCount == frameWidth)
-                {
-                    rowCount++;
-                    Console.SetCursorPosition(1, rowCount);
-                    colCount = 0;
-                }
-                Console.Write(text[symbolIndex]);
-                symbolIndex++;
-                colCount++;
-            }
         }
 
         private int PrintStingFrame(string text, int begin)
@@ -537,6 +511,9 @@ namespace NewFileManager
 
         #endregion
 
+        /// <summary>
+        ///  Поиск файла/каталога
+        /// </summary>
         private void FindFile()
         {
             if (this.panels[this.activePanelIndex].isDiscs)
@@ -630,20 +607,22 @@ namespace NewFileManager
                 }
             }
         }
-
+        /// <summary>
+        /// Показ активных клавиш
+        /// </summary>
         private void ShowKeys()
         {
-            string[] menu = { "F3 Просмотр", " F4 Поиск", "F5 Копия", "F6 Перемещ", "F7 Создать", "F8 Переимен", "F9 Удаление", "F10 Выход" };
+            
+            string[] menu = { "Esc-Выход", "F1-Помощь", "F3-Просмотр", " F4-Поиск", "F5-Копия", "F6-Перемещ", "F7-Создать", "F8-Переимен", "F9-Удаление"};
 
             int cellLeft = this.panels[0].Left;
-            int cellTop = FilePanel.PANEL_HEIGHT * this.panels.Count;
-            int cellWidth = FilePanel.PANEL_WIDTH / menu.Length;
+            int cellTop = 3;
+            int cellWidth = (UI.WindWidth-4) / menu.Length;
             int cellHeight = FileManager.HEIGHT_KEYS;
 
             for (int i = 0; i < menu.Length; i++)
             {
-                //PsCon.PrintFrameLine(cellLeft + i * cellWidth, cellTop, cellWidth, cellHeight, ConsoleColor.White, ConsoleColor.Black);
-                UI.PrintString(menu[i], cellLeft + i * cellWidth + 1, cellTop + 1, ConsoleColor.White, ConsoleColor.Black);
+                UI.PrintString(menu[i], cellLeft + i * cellWidth + 1, cellTop + 1, ConsoleColor.Cyan, ConsoleColor.Black);
             }
         }
 
