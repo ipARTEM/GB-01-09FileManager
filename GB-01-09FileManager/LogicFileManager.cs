@@ -8,24 +8,27 @@ using System.Threading.Tasks;
 
 namespace GB_01_09FileManager
 {
-    public class LogicFileManager
+    public  class LogicFileManager
     {
+        public  int numberOfRows=0;
+
+
         /// <summary>
-        /// Имя диска:
+        /// Метка диска:
         /// </summary>
-        public void GetDrives()
+        public  void GetDrives()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(2, 8);
+             
 
             foreach (var drive in DriveInfo.GetDrives())
             {
                 Console.CursorLeft= 2;
                 try
                 {
-                    
+                    numberOfRows++;
                     Console.WriteLine( drive.Name);
-                    
                 }
                 catch
                 {
@@ -37,7 +40,7 @@ namespace GB_01_09FileManager
         /// <summary>
         /// Полная информация о диске
         /// </summary>
-        public void GetFullData()
+        public  void GetFullData()
         {
             foreach (var drive in DriveInfo.GetDrives())
             {

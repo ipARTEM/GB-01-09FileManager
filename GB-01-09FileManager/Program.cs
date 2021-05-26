@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace GB_01_09FileManager
 {
+    public delegate void OnKey(ConsoleKeyInfo key);
+
     class Program
     {
         //Console.WindowHeight = Console.LargestWindowHeight;
@@ -29,24 +31,35 @@ namespace GB_01_09FileManager
             var hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
             SetConsoleDisplayMode(hConsole, 1, IntPtr.Zero);
             Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
-            Console.SetWindowSize(Console.WindowWidth, Console.WindowHeight);
-                                                                                    
-            //Console.CursorVisible = false;
+            Console.SetWindowSize(Console.WindowWidth, Console.WindowHeight);                                                                       
+            Console.CursorVisible = false;
             //Console.SetWindowSize(200, 50);
 
             UI.DrawInterface();
 
             UIElements.FirstLineAsync();
+            UIElements.SecondLine();
 
             logic.GetDrives();
 
-            
+            MoveCursor moveCursor = new MoveCursor();
 
-            Console.SetCursorPosition(1, Console.WindowHeight-4);
+            moveCursor.MoveCursorNow();
+
+
+
+            //Console.SetCursorPosition(1, Console.WindowHeight-4);
 
             //ThreadWork = false;
             //WindowSizeUpdater.Join();
-            Console.ReadLine();
+            //Console.ReadLine();
+
+            /*case ConsoleKey.Escape:
+                            exit = true;
+            Environment.Exit(0);
+            break;
+            */
+
         }
     }
 }

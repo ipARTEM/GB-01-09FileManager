@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace GB_01_09FileManager
+namespace NewFileManager
 {
-    static public class UIElements
+    class UIElements
     {
-        static public async Task FirstLineAsync()
+        static public void FirstLineAsync()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(2, 1);
@@ -22,30 +21,16 @@ namespace GB_01_09FileManager
 
             Console.SetCursorPosition(200, 1);
             Console.WriteLine($"{DateTime.Now.ToString("yyyy-MMM-dd")}");
-
-            //string date="Дата";
-            //while (true)
-            //{
-            //    lock (date)
-            //    {
-            //        Console.SetCursorPosition(200, 1);
-            //        date = Convert.ToString(DateTime.Now);
-            //        Console.WriteLine($"{date}");
-            //        Console.SetCursorPosition(1, Console.WindowHeight - 4);
-
-            //    }
-            //    await Task.Delay(100);
-            //}
-
         }
 
-        static public void   SecondLine()
+        static public void SecondLine()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(2, 4);
             Console.WriteLine("Помощь-F1   Выход-Escape   Переход-Tab ");
 
         }
+
 
     }
 }
