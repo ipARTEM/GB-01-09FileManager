@@ -167,7 +167,7 @@ namespace NewFileManager
 
                 if (currentFile != null)
                 {
-                    string fileName = currentFile.Name;
+                    string fileName = currentFile.Name;                                   
                     string destName = Path.Combine(destPath, fileName);
                     File.Copy(currentFile.FullName, destName, true);
                 }
@@ -239,7 +239,7 @@ namespace NewFileManager
             }
         }
 
-        int linePanel = 30;
+        int linePanel = 47;
         int NumLineInt;
 
         public static string NumLineStr="18";
@@ -652,7 +652,7 @@ namespace NewFileManager
         private void ShowKeys()
         {
             
-            string[] menu = { "Esc-Выход", "F1-Помощь", "F3-Просмотр", " F4-Поиск", "F5-Копия", "F6-Перемещ", "F7-Создать", "F8-Переименовать", "F9-Удаление"};
+            string[] menu = { "Esc-Выход", "Tab-Переход", "F3-Просмотр", " F4-Поиск", "F5-Копия", "F6-Перемещ", "F7-Создать", "F8-Переименовать", "F9-Удаление"};
 
             int cellLeft = this.panels[0].Left;
             int cellTop = 2;

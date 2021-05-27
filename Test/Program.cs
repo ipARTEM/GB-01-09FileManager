@@ -8,59 +8,55 @@ namespace Test
 {
     class Program
     {
-        class Sample
+        static void Main()
         {
-            protected static int origRow;
-            protected static int origCol;
+            string fileName = "test.txt";
+            //string fileName2 = "test1.txt";
+            string sourcePath = @"D:\1";
+            string targetPath = @"D:\1\1";
 
-            protected static void WriteAt(string s, int x, int y)
+
+            //Используйте класс Path для управления путями к файлам и каталогам.
+            // Use Path class to manipulate file and directory paths.
+            string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+            string destFile = System.IO.Path.Combine(targetPath, fileName);
+
+            // To copy a folder's contents to a new location:
+            // Create a new target folder.
+            // If the directory already exists, this method does not create a new directory.
+            System.IO.Directory.CreateDirectory(targetPath);
+
+            // To copy a file to another location and
+            // overwrite the destination file if it already exists.
+            System.IO.File.Copy(sourceFile, destFile, true);
+
+            // To copy all the files in one directory to another directory.
+            // Get the files in the source folder. (To recursively iterate through
+            // all subfolders under the current directory, see
+            // "How to: Iterate Through a Directory Tree.")
+            // Note: Check for target path was performed previously
+            //       in this code example.
+            if (System.IO.Directory.Exists(sourcePath))
             {
-                try
+                string[] files = System.IO.Directory.GetFiles(sourcePath);
+
+                // Copy the files and overwrite destination files if they already exist.
+                foreach (string s in files)
                 {
-                    Console.SetCursorPosition(origCol + x, origRow + y);
-                    Console.Write(s);
-                }
-                catch (ArgumentOutOfRangeException e)
-                {
-                    Console.Clear();
-                    Console.WriteLine(e.Message);
+                    // Use static Path methods to extract only the file name from the path.
+                    fileName = System.IO.Path.GetFileName(s);
+                    destFile = System.IO.Path.Combine(targetPath, fileName);
+                    System.IO.File.Copy(s, destFile, true);
                 }
             }
-
-            public static void Main()
+            else
             {
-                // Clear the screen, then save the top and left coordinates.
-                Console.Clear();
-                origRow = Console.CursorTop;
-                origCol = Console.CursorLeft;
-
-                // Draw the left side of a 5x5 rectangle, from top to bottom.
-                WriteAt("+", 0, 0);
-                WriteAt("|", 0, 1);
-                WriteAt("|", 0, 2);
-                WriteAt("|", 0, 3);
-                WriteAt("+", 0, 4);
-
-                // Draw the bottom side, from left to right.
-                WriteAt("-", 1, 4); // shortcut: WriteAt("---", 1, 4)
-                WriteAt("-", 2, 4); // ...
-                WriteAt("-", 3, 4); // ...
-                WriteAt("+", 4, 4);
-
-                // Draw the right side, from bottom to top.
-                WriteAt("|", 4, 3);
-                WriteAt("|", 4, 2);
-                WriteAt("|", 4, 1);
-                WriteAt("+", 4, 0);
-
-                // Draw the top side, from right to left.
-                WriteAt("-", 3, 0); // shortcut: WriteAt("---", 1, 0)
-                WriteAt("-", 2, 0); // ...
-                WriteAt("-", 1, 0); // ...
-                                    //
-                WriteAt("All done!", 0, 6);
-                Console.WriteLine();
+                Console.WriteLine("Source path does not exist!");
             }
+
+            // Keep console window open in debug mode.
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }
