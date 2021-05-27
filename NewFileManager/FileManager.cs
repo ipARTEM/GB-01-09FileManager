@@ -100,7 +100,7 @@ namespace NewFileManager
                         case ConsoleKey.F8:
                             this.Rename();
                             break;
-                        case ConsoleKey.F9:
+                        case ConsoleKey.Delete:
                             this.Delete();
                             break;
                         case ConsoleKey.DownArrow:
@@ -652,7 +652,7 @@ namespace NewFileManager
         private void ShowKeys()
         {
             
-            string[] menu = { "Esc-Выход", "Tab-Переход", "F3-Просмотр", " F4-Поиск", "F5-Копия", "F6-Перемещ", "F7-Создать", "F8-Переименовать", "F9-Удаление"};
+            string[] menu = { "Esc-Выход", "Tab-Переход", "F3-Просмотр", " F4-Поиск", "F5-Копия", "F6-Перемещение", "F7-Создать", "F8-Переименовать", "Delete-Удаление"};
 
             int cellLeft = this.panels[0].Left;
             int cellTop = 2;
