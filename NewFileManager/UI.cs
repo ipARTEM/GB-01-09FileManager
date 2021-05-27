@@ -10,7 +10,7 @@ namespace NewFileManager
     static class UI
     {
         public static int windHeight = Convert.ToInt32(Console.WindowHeight) - 2;
-        public static int WindWidth = Convert.ToInt32(Console.WindowWidth) - 2;
+        public static int windWidth = Convert.ToInt32(Console.WindowWidth) - 2;
 
         /// <summary>
         /// Вывод интерфейса программы
@@ -23,25 +23,25 @@ namespace NewFileManager
             for (int i = 1; i < windHeight; i++)
             {
                 DrawSymbol(0, i, '║');
-                DrawSymbol(WindWidth + 1, i, '║');
+                DrawSymbol(windWidth + 1, i, '║');
 
                 if (7 < i && i < windHeight - 12)
                 {
-                    DrawSymbol((WindWidth / 4), i, '║');
-                    DrawSymbol((WindWidth / 2) - 1, i, '║');
-                    DrawSymbol(WindWidth / 2, i, '║');
-                    DrawSymbol((3 * WindWidth / 4) - 1, i, '║');
+                    DrawSymbol((windWidth / 4), i, '║');
+                    DrawSymbol((windWidth / 2) - 1, i, '║');
+                    DrawSymbol(windWidth / 2, i, '║');
+                    DrawSymbol((3 * windWidth / 4) - 1, i, '║');
                 }
             }
-            DrawText(0, 0, $"╔{GetIteratedString("═", WindWidth)}╗");
-            DrawText(0, 2, $"╠{GetIteratedString("═", WindWidth)}╣");
-            DrawText(0, 5, $"╠{GetIteratedString("═", WindWidth)}╣");
-            DrawText(0, 7, $"╠{GetIteratedString("═", (WindWidth / 4) - 1)}╦{GetIteratedString("═", (WindWidth / 4) - 1)}╦╦" +
-                                         $"{GetIteratedString("═", (WindWidth / 4) - 1)}╦{GetIteratedString("═", (WindWidth / 4))}══╣");
-            DrawText(0, windHeight - 12, $"╠{GetIteratedString("═", (WindWidth / 4) - 1)}╩{GetIteratedString("═", (WindWidth / 4) - 1)}╩╩" +
-                                         $"{GetIteratedString("═", (WindWidth / 4) - 1)}╩{GetIteratedString("═", (WindWidth / 4))}══╣");
-            DrawText(0, windHeight - 3, $"╠{GetIteratedString("═", WindWidth)}╣");
-            DrawText(0, windHeight - 1, $"╚{GetIteratedString("═", WindWidth)}╝");
+            DrawText(0, 0, $"╔{GetIteratedString("═", windWidth)}╗");
+            DrawText(0, 2, $"╠{GetIteratedString("═", windWidth)}╣");
+            DrawText(0, 5, $"╠{GetIteratedString("═", windWidth)}╣");
+            DrawText(0, 7, $"╠{GetIteratedString("═", (windWidth / 4) - 1)}╦{GetIteratedString("═", (windWidth / 4) - 1)}╦╦" +
+                                         $"{GetIteratedString("═", (windWidth / 4) - 1)}╦{GetIteratedString("═", (windWidth / 4))}══╣");
+            DrawText(0, windHeight - 12, $"╠{GetIteratedString("═", (windWidth / 4) - 1)}╩{GetIteratedString("═", (windWidth / 4) - 1)}╩╩" +
+                                         $"{GetIteratedString("═", (windWidth / 4) - 1)}╩{GetIteratedString("═", (windWidth / 4))}══╣");
+            DrawText(0, windHeight - 3, $"╠{GetIteratedString("═", windWidth)}╣");
+            DrawText(0, windHeight - 1, $"╚{GetIteratedString("═", windWidth)}╝");
         }
 
 
@@ -81,50 +81,6 @@ namespace NewFileManager
 
 
 
-        //public static void OpenBuffer(string bufferName, int bufferSizeX, int bufferSizeY, ConsoleColor text, ConsoleColor background)
-        //{
-        //    Console.Title = bufferName;
-        //    Console.SetWindowSize(bufferSizeX, bufferSizeY);
-        //    Console.ForegroundColor = text;
-        //    Console.BackgroundColor = background;
-        //    Console.Clear();
-        //    Console.SetCursorPosition(0, 0);
-        //}
-
-        
-        //public static void PrintCountChar(string ch, int positionX, int positionY, int size, ConsoleColor text, ConsoleColor background)
-        //{
-        //    int SizeX = positionX + size;
-
-        //    Console.ForegroundColor = text;
-        //    Console.BackgroundColor = background;
-
-        //    for (int x = positionX; x < SizeX; x++)
-        //    {
-        //        Console.SetCursorPosition(x, positionY);
-        //        Console.Write(ch);
-        //    }
-
-        //    Console.ForegroundColor = ConsoleColor.White;
-        //    Console.BackgroundColor = ConsoleColor.Black;
-        //}
-
-        //public static void PrintCountChar(bool cansel, string ch, int positionX, int positionY, int size, ConsoleColor text, ConsoleColor background)
-        //{
-        //    int SizeY = positionY + size;
-
-        //    Console.ForegroundColor = text;
-        //    Console.BackgroundColor = background;
-
-        //    for (int y = positionY; y < SizeY; y++)
-        //    {
-        //        Console.SetCursorPosition(positionX, y);
-        //        Console.Write(ch);
-        //    }
-
-        //    Console.ForegroundColor = ConsoleColor.White;
-        //    Console.BackgroundColor = ConsoleColor.Black;
-        //}
 
         /// <summary>
         /// Путь

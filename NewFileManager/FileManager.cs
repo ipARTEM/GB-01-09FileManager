@@ -14,7 +14,7 @@ namespace NewFileManager
         //========================== Static ==========================
 
         public static int HEIGHT_KEYS = 3;
-        public static int BOTTOM_OFFSET = 2;
+        public static int BOTTOM_OFFSET = 4;
 
         //========================== Fields ==========================
 
@@ -41,7 +41,7 @@ namespace NewFileManager
             //2-панель
             filePanel1 = new FilePanel();
             filePanel1.Top = 7;
-            filePanel1.Left = 110;
+            filePanel1.Left = (UI.windWidth/2)+1;
             this.panels.Add(filePanel1);
 
             activePanelIndex = 0;
@@ -53,8 +53,8 @@ namespace NewFileManager
             {
                 fp.Show();
             }
-
-            this.ShowKeys();
+            ShowKeys();
+            ShowKeys2();
         }
 
         #endregion
@@ -245,7 +245,7 @@ namespace NewFileManager
 
             string destPath = this.panels[this.activePanelIndex].Path;
             string dirName = this.AksName("Введите имя каталога: ");
-
+            UI.DrawInterface();
             try
             {
                 string dirFullName = Path.Combine(destPath, dirName);
@@ -253,6 +253,7 @@ namespace NewFileManager
                 if (!dir.Exists)
                 {
                     dir.Create();
+                    UI.DrawInterface();
                 }
                 else
                 {
@@ -417,8 +418,8 @@ namespace NewFileManager
                             {
                                 beginPosition = 0;
                             }
-                            symbolCount = this.PrintStingFrame(fileContent, beginPosition);
-                            this.PrintProgress(beginPosition + symbolCount, fileContent.Length);
+                            symbolCount = PrintStingFrame(fileContent, beginPosition);
+                            PrintProgress(beginPosition + symbolCount, fileContent.Length);
                         }
                         break;
                 }
@@ -429,7 +430,9 @@ namespace NewFileManager
             {
                 fp.Show();
             }
-            this.ShowKeys();
+            ShowKeys();
+            ShowKeys2();
+
         }
 
         private void DrawViewFileFrame(string file)
@@ -613,11 +616,27 @@ namespace NewFileManager
         private void ShowKeys()
         {
             
-            string[] menu = { "Esc-Выход", "F1-Помощь", "F3-Просмотр", " F4-Поиск", "F5-Копия", "F6-Перемещ", "F7-Создать", "F8-Переимен", "F9-Удаление"};
+            string[] menu = { "Esc-Выход", "F1-Помощь", "F3-Просмотр", " F4-Поиск", "F5-Копия", "F6-Перемещ", "F7-Создать", "F8-Переименовать", "F9-Удаление"};
+
+            int cellLeft = this.panels[0].Left;
+            int cellTop = 2;
+            int cellWidth = (UI.windWidth) / menu.Length;
+            int cellHeight = FileManager.HEIGHT_KEYS;
+
+            for (int i = 0; i < menu.Length; i++)
+            {
+                UI.PrintString(menu[i], cellLeft + i * cellWidth + 1, cellTop + 1, ConsoleColor.Cyan, ConsoleColor.Black);
+            }
+        }
+
+        private void ShowKeys2()
+        {
+
+            string[] menu = { "Home-Верх 1й страницы", "End-Конец последней страницы", "PageUp-На страницу вверх", " PageDown-На страницу вниз" };
 
             int cellLeft = this.panels[0].Left;
             int cellTop = 3;
-            int cellWidth = (UI.WindWidth-4) / menu.Length;
+            int cellWidth = (UI.windWidth) / menu.Length;
             int cellHeight = FileManager.HEIGHT_KEYS;
 
             for (int i = 0; i < menu.Length; i++)
@@ -628,12 +647,12 @@ namespace NewFileManager
 
         private void ShowMessage(string message)
         {
-            UI.PrintString(message, 0, Console.WindowHeight - BOTTOM_OFFSET, ConsoleColor.White, ConsoleColor.Black);
+            UI.PrintString(message, 1, Console.WindowHeight - BOTTOM_OFFSET, ConsoleColor.White, ConsoleColor.Black);
         }
 
         private void ClearMessage()
         {
-            UI.PrintString(new String(' ', Console.WindowWidth), 0, Console.WindowHeight - BOTTOM_OFFSET, ConsoleColor.White, ConsoleColor.Black);
+            UI.PrintString(new String(' ', Console.WindowWidth), 1, Console.WindowHeight - BOTTOM_OFFSET, ConsoleColor.White, ConsoleColor.Black);
         }
     }
 }

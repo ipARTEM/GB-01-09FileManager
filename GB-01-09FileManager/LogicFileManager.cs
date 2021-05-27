@@ -56,7 +56,9 @@ namespace GB_01_09FileManager
                     Console.WriteLine("Размер диска (в байтах): " + drive.TotalSize);
                     Console.WriteLine("Метка тома диска: " + drive.VolumeLabel);
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
         }

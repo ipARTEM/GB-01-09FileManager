@@ -19,7 +19,7 @@ namespace NewFileManager
         public int panelH = 20;
 
         public static int PANEL_HEIGHT = 30;
-        public static int PANEL_WIDTH = 40;
+        public static int PANEL_WIDTH = UI.windWidth/2;
 
         #endregion
 
@@ -36,7 +36,7 @@ namespace NewFileManager
             }
             set
             {
-                if (0 <= value && value <= Console.WindowHeight - panelH)
+                if (0 <= value && value <= Console.WindowHeight - FilePanel.PANEL_HEIGHT)
                 {
                     this.top = value;
                 }
@@ -397,9 +397,6 @@ namespace NewFileManager
         public void Show()
         {
             this.Clear();
-
-            //PsCon.PrintFrameDoubleLine(this.left, this.top, this.width, this.height, ConsoleColor.White, ConsoleColor.Black);
-
             StringBuilder caption = new StringBuilder();
             if (this.discs)
             {
@@ -418,7 +415,7 @@ namespace NewFileManager
         {
             for (int i = 0; i < this.height; i++)
             {
-                string space = new String(' ', this.width);
+                string space = new String(' ', width);
                 Console.SetCursorPosition(this.left, this.top + i);
                 Console.Write(space);
             }
