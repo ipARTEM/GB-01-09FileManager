@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace NewFileManager
 {
     class FilePanel
-    { //========================== Static ==========================
+    { 
 
 
 
@@ -18,12 +18,12 @@ namespace NewFileManager
 
         public int panelH = 20;
 
-        public static int PANEL_HEIGHT = 30;
+        public static int PANEL_HEIGHT = Program.startLine;
         public static int PANEL_WIDTH = UI.windWidth/2;
 
         #endregion
 
-        //========================== Fields ==========================
+       
 
         #region Panel location
 
@@ -159,28 +159,28 @@ namespace NewFileManager
 
         private List<FileSystemInfo> fsObjects = new List<FileSystemInfo>();
 
-        //========================== Methods ==========================
+       
 
         #region Ctor
 
         public FilePanel()
         {
-            this.SetDiscs();
+            SetDiscs();
         }
 
         public FilePanel(string path)
         {
             this.path = path;
-            this.SetLists();
+            SetLists();
         }
 
         #endregion
 
         public FileSystemInfo GetActiveObject()
         {
-            if (this.fsObjects != null && this.fsObjects.Count != 0)
+            if (fsObjects != null && fsObjects.Count != 0)
             {
-                return this.fsObjects[this.activeObjectIndex];
+                return fsObjects[activeObjectIndex];
             }
             throw new Exception("Список объектов панели пуст");
         }
@@ -192,12 +192,12 @@ namespace NewFileManager
             {
                 if (file != null && file.Name == name)
                 {
-                    this.activeObjectIndex = index;
-                    if (this.activeObjectIndex > this.displayedObjectsAmount)
+                    activeObjectIndex = index;
+                    if (activeObjectIndex > displayedObjectsAmount)
                     {
-                        this.firstObjectIndex = activeObjectIndex;
+                        firstObjectIndex = activeObjectIndex;
                     }
-                    this.UpdateContent(false);
+                    UpdateContent(false);
                     return true;
                 }
                 index++;
@@ -211,28 +211,32 @@ namespace NewFileManager
         {
             switch (key.Key)
             {
+                
+
                 case ConsoleKey.UpArrow:
-                    this.ScrollUp();
+                    ScrollUp();
                     break;
                 case ConsoleKey.DownArrow:
-                    this.ScrollDown();
+                    ScrollDown();
                     break;
                 case ConsoleKey.Home:
-                    this.GoBegin();
+                    GoBegin();
                     break;
                 case ConsoleKey.End:
-                    this.GoEnd();
+                    GoEnd();
                     break;
                 case ConsoleKey.PageUp:
-                    this.PageUp();
+                    PageUp();
                     break;
                 case ConsoleKey.PageDown:
-                    this.PageDown();
+                    PageDown();
                     break;
                 default:
                     break;
             }
         }
+
+  
 
         private void ScrollDown()
         {

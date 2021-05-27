@@ -11,18 +11,18 @@ namespace NewFileManager
 {
     class FileManager
     {
-        //========================== Static ==========================
+       
 
         public static int HEIGHT_KEYS = 3;
         public static int BOTTOM_OFFSET = 4;
 
-        //========================== Fields ==========================
+        
 
         public event OnKey KeyPress;
         List<FilePanel> panels = new List<FilePanel>();
         private int activePanelIndex;
 
-        //========================== Methods ==========================
+       
 
         #region Ctor
 
@@ -107,6 +107,9 @@ namespace NewFileManager
                             goto case ConsoleKey.PageUp;
                         case ConsoleKey.UpArrow:
                             goto case ConsoleKey.PageUp;
+                        case ConsoleKey.Insert:
+                            InsertLine();
+                            break;
                         case ConsoleKey.End:
                             goto case ConsoleKey.PageUp;
                         case ConsoleKey.Home:
@@ -123,7 +126,7 @@ namespace NewFileManager
             }
         }
 
-        private string AksName(string message)
+        public string AksName(string message)
         {
             string name;
             Console.CursorVisible = true;
@@ -234,6 +237,39 @@ namespace NewFileManager
                 this.ShowMessage(e.Message);
                 return;
             }
+        }
+
+        int linePanel = 30;
+        int NumLineInt;
+
+        public static string NumLineStr="18";
+       
+        //public static string NumLineStrNew="19";
+        public static string l = "l";
+
+        private void InsertLine()
+        {
+            
+            while (!(0< NumLineInt&& NumLineInt<= linePanel))
+            {
+                 NumLineStr = AksName($"Введите количество строк от 1 до {linePanel}:");
+
+                try
+                {
+                    NumLineInt = Convert.ToInt32( NumLineStr);
+                }
+                catch (Exception)
+                {
+                }
+
+            }
+
+            FilePanel.PANEL_HEIGHT = NumLineInt;
+            ShowKeys2();
+            AksName("После перезагрузки количество строк изменится!");
+
+            //AddUpdateAppSettings(l, NumLineStr);
+
         }
 
         private void CreateDirectory()
@@ -632,7 +668,7 @@ namespace NewFileManager
         private void ShowKeys2()
         {
 
-            string[] menu = { "Home-Верх 1й страницы", "End-Конец последней страницы", "PageUp-На страницу вверх", " PageDown-На страницу вниз" };
+            string[] menu = { $"Кол-ва элементов на стр.-'{FilePanel.PANEL_HEIGHT}'", "Insert-Изменить кол-во эл-тов на стр. ", " Home-Верх 1й страницы", "End-Конец последней страницы", "PageUp-На страницу вверх", " PageDown-На страницу вниз" };
 
             int cellLeft = this.panels[0].Left;
             int cellTop = 3;
