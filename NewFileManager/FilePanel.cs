@@ -235,18 +235,18 @@ namespace NewFileManager
                 default:
                     break;
             }
-            GetFullInfo();
+            
         }
 
         public  void GetFullInfo()
         {
-            Console.SetCursorPosition(1, 54);
+
 
             //foreach (FilePanel panel in panels)
             //{
             //    if (panel.isDiscs)
             //    {
-            //        //return;
+            //        return;
             //    }
             //}
 
@@ -293,38 +293,7 @@ namespace NewFileManager
 
         }
 
-        /// <summary>
-        /// Полная информация о диске
-        /// </summary>
-        public  void GetFullData()
-        {
-            foreach (var drive in DriveInfo.GetDrives())
-            {
-
-                if (true)
-                {
-                    try
-                    {
-                        Console.WriteLine("Имя диска: " + drive.Name);
-                        Console.WriteLine("Файловая система: " + drive.DriveFormat);
-                        Console.WriteLine("Тип диска: " + drive.DriveType);
-                        Console.WriteLine("Объем доступного свободного места (в байтах): " + drive.AvailableFreeSpace);
-                        Console.WriteLine("Готов ли диск: " + drive.IsReady);
-                        Console.WriteLine("Корневой каталог диска: " + drive.RootDirectory);
-                        Console.WriteLine("Общий объем свободного места, доступного на диске (в байтах): " + drive.TotalFreeSpace);
-                        Console.WriteLine("Размер диска (в байтах): " + drive.TotalSize);
-                        Console.WriteLine("Метка тома диска: " + drive.VolumeLabel);
-                    }
-                    catch
-                    {
-                    }
-                }
-
-
-            }
-
-        }
-
+       
 
         private void ScrollDown()
         {
@@ -562,7 +531,7 @@ namespace NewFileManager
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
-            for (int i = 1; i < 8; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 string space = new String(' ', this.width - 2);
                 Console.SetCursorPosition(1, 53 + i);
@@ -593,7 +562,7 @@ namespace NewFileManager
             Console.SetCursorPosition(1,54);
             ClearInfo();
             Console.SetCursorPosition(1, 54);
-            Console.WriteLine(fsObjects[index].Name);
+            InfoWrite(index);
 
             Console.SetCursorPosition(currentCursorLeftPosition + this.width / 2, currentCursorTopPosition);
             if (fsObjects[index] is DirectoryInfo)
@@ -607,6 +576,68 @@ namespace NewFileManager
                 
             }
         }
+        public void InfoWrite(int index)
+        {
+            if (this.discs)
+            {
+                GetFullData(index);
+            }
+
+            else if (fsObjects[index] is DirectoryInfo)
+            {
+                Console.WriteLine("Полное имя : " + ((DirectoryInfo)fsObjects[index]).FullName);
+                //Console.WriteLine("Имя диска: " + ((DirectoryInfo)fsObjects[index]).Name);
+                Console.WriteLine(" Имя диска: " + ((DirectoryInfo)fsObjects[index]).Parent);
+                Console.WriteLine(" Дата создания: " + ((DirectoryInfo)fsObjects[index]).CreationTime);
+                Console.WriteLine(" Имя диска: " + ((DirectoryInfo)fsObjects[index]).Exists);
+                Console.WriteLine(" Атрибуты: " + ((DirectoryInfo)fsObjects[index]).Attributes);
+                Console.WriteLine(" Расширение файла: " + ((DirectoryInfo)fsObjects[index]).Extension);
+              
+
+
+
+            }
+            else
+            {
+                Console.Write("{0}", ((FileInfo)fsObjects[index]).Length);
+
+            }
+
+            
+        }
+
+        /// <summary>
+        /// Полная информация о диске
+        /// </summary>
+        public void GetFullData(int index)
+        {
+            foreach (var drive in DriveInfo.GetDrives())
+            {
+
+                if (fsObjects[index].Name == drive.Name)
+                {
+                    try
+                    {
+                        Console.WriteLine("Имя диска: " + drive.Name);
+                        Console.WriteLine(" Файловая система: " + drive.DriveFormat);
+                        Console.WriteLine(" Тип диска: " + drive.DriveType);
+                        Console.WriteLine(" Объем доступного свободного места (в байтах): " + drive.AvailableFreeSpace);
+                        Console.WriteLine("Готов ли диск: " + drive.IsReady);
+                        //Console.WriteLine("Корневой каталог диска: " + drive.RootDirectory);
+                        Console.WriteLine(" Общий объем свободного места, доступного на диске (в байтах): " + drive.TotalFreeSpace);
+                        Console.WriteLine(" Размер диска (в байтах): " + drive.TotalSize);
+                        Console.WriteLine(" Метка тома диска: " + drive.VolumeLabel);
+                    }
+                    catch
+                    {
+                    }
+                }
+
+
+            }
+
+        }
+
 
         public void UpdatePanel()
         {
@@ -638,6 +669,9 @@ namespace NewFileManager
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
         }
+
+
+
 
         private void DeactivateObject(int index)
         {
