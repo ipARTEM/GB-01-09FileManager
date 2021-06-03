@@ -157,7 +157,7 @@ namespace NewFileManager
 
         #endregion
 
-        private List<FileSystemInfo> fsObjects = new List<FileSystemInfo>();
+        public List<FileSystemInfo> fsObjects = new List<FileSystemInfo>();
 
        
 
@@ -209,6 +209,7 @@ namespace NewFileManager
 
         public void KeyboardProcessing(ConsoleKeyInfo key)
         {
+            //UI.GetFullInfo();
             switch (key.Key)
             {
                 
@@ -234,9 +235,96 @@ namespace NewFileManager
                 default:
                     break;
             }
+            GetFullInfo();
         }
 
-  
+        public  void GetFullInfo()
+        {
+            Console.SetCursorPosition(1, 54);
+
+            //foreach (FilePanel panel in panels)
+            //{
+            //    if (panel.isDiscs)
+            //    {
+            //        //return;
+            //    }
+            //}
+
+            //if (panels[0].Path == panels[1].Path)
+            //{
+            //    return;
+            //}
+
+            //try
+            //{
+            //    string destPath = this.activePanelIndex == 0 ? this.panels[1].Path : this.panels[0].Path;
+            //    FileSystemInfo fileObject = this.panels[this.activePanelIndex].GetActiveObject();
+            //    Console.WriteLine(fileObject);
+            //    string objectName = fileObject.Name;
+            //    string destName = Path.Combine(destPath, objectName);
+            //    Console.WriteLine(objectName);
+            //    if (fileObject is FileInfo)
+            //    {
+            //        ((FileInfo)fileObject).MoveTo(destName);
+            //    }
+            //    else
+            //    {
+            //        ((DirectoryInfo)fileObject).MoveTo(destName);
+            //    }
+
+            //    this.RefreshPannels();
+
+            //    Console.WriteLine(destPath);
+            //}
+            //catch (Exception e)
+            //{
+            //    this.ShowMessage(e.Message);
+            //    return;
+            //}
+
+
+            //Console.WriteLine("Файловая система: " + drive.DriveFormat);
+            //Console.WriteLine("Тип диска: " + drive.DriveType);
+            //Console.WriteLine("Объем доступного свободного места (в байтах): " + drive.AvailableFreeSpace);
+            //Console.WriteLine("Готов ли диск: " + drive.IsReady);
+            //Console.WriteLine("Корневой каталог диска: " + drive.RootDirectory);
+            //Console.WriteLine("Общий объем свободного места, доступного на диске (в байтах): " + drive.TotalFreeSpace);
+
+
+        }
+
+        /// <summary>
+        /// Полная информация о диске
+        /// </summary>
+        public  void GetFullData()
+        {
+            foreach (var drive in DriveInfo.GetDrives())
+            {
+
+                if (true)
+                {
+                    try
+                    {
+                        Console.WriteLine("Имя диска: " + drive.Name);
+                        Console.WriteLine("Файловая система: " + drive.DriveFormat);
+                        Console.WriteLine("Тип диска: " + drive.DriveType);
+                        Console.WriteLine("Объем доступного свободного места (в байтах): " + drive.AvailableFreeSpace);
+                        Console.WriteLine("Готов ли диск: " + drive.IsReady);
+                        Console.WriteLine("Корневой каталог диска: " + drive.RootDirectory);
+                        Console.WriteLine("Общий объем свободного места, доступного на диске (в байтах): " + drive.TotalFreeSpace);
+                        Console.WriteLine("Размер диска (в байтах): " + drive.TotalSize);
+                        Console.WriteLine("Метка тома диска: " + drive.VolumeLabel);
+                    }
+                    catch
+                    {
+                    }
+                }
+
+
+            }
+
+        }
+
 
         private void ScrollDown()
         {
@@ -470,6 +558,18 @@ namespace NewFileManager
                 Console.Write(space);
             }
         }
+        private void ClearInfo()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+            for (int i = 1; i < 8; i++)
+            {
+                string space = new String(' ', this.width - 2);
+                Console.SetCursorPosition(1, 53 + i);
+                Console.Write(space);
+            }
+        }
+
 
         private void PrintObject(int index)
         {
@@ -484,18 +584,27 @@ namespace NewFileManager
             if (!this.discs && index == 0)
             {
                 Console.Write("..");
+                
                 return;
             }
 
             Console.Write("{0}", fsObjects[index].Name);
+            
+            Console.SetCursorPosition(1,54);
+            ClearInfo();
+            Console.SetCursorPosition(1, 54);
+            Console.WriteLine(fsObjects[index].Name);
+
             Console.SetCursorPosition(currentCursorLeftPosition + this.width / 2, currentCursorTopPosition);
             if (fsObjects[index] is DirectoryInfo)
             {
                 Console.Write("{0}", ((DirectoryInfo)fsObjects[index]).LastWriteTime);
+                
             }
             else
             {
                 Console.Write("{0}", ((FileInfo)fsObjects[index]).Length);
+                
             }
         }
 

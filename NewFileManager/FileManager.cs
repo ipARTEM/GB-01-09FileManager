@@ -345,6 +345,10 @@ namespace NewFileManager
 
         }
 
+       
+
+
+
         private void Rename()
         {
             if (this.panels[this.activePanelIndex].isDiscs)
